@@ -31,18 +31,17 @@
 
 ## System Resources and Context
 
-### What You Receive:
+### Prerequisites:
 - Bearer token for ServiceNow MCP authentication from n8n environment
 - AWS Bedrock access keys for AI model integration in n8n
 - Javascript code for ServiceNow agent to kick off n8n workflow through webhook
 
-### What You Build:
+### What I Build:
 - ServiceNow scoped application with AI agents for supply chain processing
 - n8n workflow for external system coordination
 - Complete integration testing and validation
 
-**n8n Environment Setup:** Create a free n8n account with a new email address (used Kura Labs email previously for class)
-
+**n8n Environment Setup:** I created a free n8n account with my personal a new email address 
 ## Assignment Objectives
 
 ### General System Component Flow
