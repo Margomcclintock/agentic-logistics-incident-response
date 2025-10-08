@@ -124,7 +124,7 @@ I created a scoped application with the exact name: **PepsiCo Deliveries**
 - `stockout_penalty_rate` (Integer) - Cost per hour of delay in dollars
 <img width="793" height="303" alt="image" src="https://github.com/user-attachments/assets/aff9698a-bc25-4cd7-b55a-54f878621272" />
 
-**Required Sample Record:** Create this record in your Supply Agreement table:
+**Required Sample Record:** I created this record in the Supply Agreement table:
 - `customer_id`: 1
 - `customer_name`: "Whole Foods"
 - `deliver_window_hours`: 3
@@ -168,7 +168,7 @@ I created a scoped application with the exact name: **PepsiCo Deliveries**
 <img width="949" height="290" alt="image" src="https://github.com/user-attachments/assets/eb4b6bd1-9373-426c-8aed-b583c9c3fc83" />
 
 **Key Responsibilities:**
-- Query customer contract terms and penalty structures from Supply Agreement table
+- Query customer contract terms and penalty structures from the Supply Agreement table
 - Calculate delay costs for each proposed route option using `deliver_window_hours` and `stockout_penalty_rate`
 - Create incident records with comprehensive breakdown details
 - Update delivery records with calculated financial impact
@@ -284,24 +284,6 @@ I captured execution logs for all workflow components and consolidated them into
 - Check status progression: pending → calculated → approved → dispatched
 <img width="780" height="298" alt="image" src="https://github.com/user-attachments/assets/7577c792-865f-4663-821c-de4c4333492a" />
 
-#### Integration Verification:
-- Confirm webhook connectivity between ServiceNow and n8n
-- <img width="955" height="350" alt="image" src="https://github.com/user-attachments/assets/66ea2154-da60-42d9-941e-698ee5ad784e" />
-
-- Verify MCP client authentication and communication
-- Test incident creation and priority assignment functionality
-- Validate status transitions and logging throughout the process
-<img width="938" height="392" alt="image" src="https://github.com/user-attachments/assets/ee1db4ac-6993-41ed-993e-8fcc7bf2b933" />
-<img width="949" height="371" alt="image" src="https://github.com/user-attachments/assets/21a9622b-dd5d-45f6-819b-24689745f67b" />
-
-## Deliverables - Submission Requirements
-
-- Test complete system functionality with realistic supply chain scenarios
-- Create update set with all required components and evidence records
-- Export n8n workflow configuration with proper documentation
-- Upload GitHub repository with comprehensive documentation and architecture diagram
-- Submit repository URL demonstrating working system integration
-
 ## Critical Success Factors
 
 - AI agents must successfully process delivery delays and calculate accurate financial impacts
@@ -312,65 +294,50 @@ I captured execution logs for all workflow components and consolidated them into
 
 **Important Troubleshooting Note:** If the automatic trigger doesn't activate with new "pending" records, validate your use case configuration and test manually through AI Agent Studio to ensure core functionality works correctly.
 
-## 1. Update Set Requirements
+## System Optimization Summary
+ 
+I refined this system to make it run faster, stay consistent, and handle errors more smoothly. The focus was on maintaining a clean data flow between ServiceNow, n8n, and the AI agents, without unnecessary steps.
 
-Your update set must contain these working components:
+**Webhook Fix:** Updated the webhook to the live production URL, ensuring an instant and reliable connection.
 
-### AI Agent Studio Components:
+**Simplified Flow:** Removed extra logic so the process moves directly from the webhook to the AI agent and back into ServiceNow.
 
-**Step 1:** Activate Your Update Set before collecting AI Agent components, ensure your update set is active to capture all components.
+**Smarter Script:** Replaced multiple API calls with one clean n8n webhook script, which cut down on time and complexity.
 
-**Step 2:** Collect AI Agent Studio Components
+**Error Recovery:** Added fallback checks and clear success messages so the system keeps running even if something fails.
 
-- **Use Case Definition:** You can get the use case from your ServiceNow Studio scoped application menu by navigating to your PepsiCo Deliveries application scope. In the left navigation panel, expand the application menu and look for "Use Cases" under AI Agent Studio components. Find your supply chain use case record and add it to the update set.
+**Better Tracking:** Every run is logged for quick troubleshooting and easy visibility into what happened.
 
-- **Trigger M2M:** You can get trigger relationships from your ServiceNow Studio scoped application by navigating to your PepsiCo Deliveries application scope. In the left navigation panel, look for "Trigger M2M" under AI Agent Studio components. Find the trigger relationships for your use case and add them to the update set.
+**Faster Performance:** Shared data between agents instead of reloading it, which sped up response times and reduced duplicate work.
 
-- **AI Agents:** You can get AI agent definitions from your ServiceNow Studio scoped application by navigating to your PepsiCo Deliveries application scope. In the left navigation panel, look for "AI Agent" under AI Agent Studio components. Find both your Route Financial Analysis Agent and Route Decision Agent records and add them to the update set.
+**Next Steps:**
+Add caching to avoid repeated lookups, run agents side-by-side for faster results, and include automated retries and better monitoring to make it even more reliable.
 
-- **Agent Tools:** You can get agent tools from your ServiceNow Studio scoped application by navigating to your PepsiCo Deliveries application scope. In the left navigation panel, look for "Agent Tool" under AI Agent Studio components. Find all tools associated with your agents and add them to the update set.
+## Testing Results: 
+Evidence of successful end-to-end system operation with specific examples of financial analysis, routing decisions, and external execution
+<img width="956" height="370" alt="image" src="https://github.com/user-attachments/assets/0f3d768d-602e-4d38-b486-85c2931d2f6a" />
+<img width="948" height="341" alt="image" src="https://github.com/user-attachments/assets/89a545d2-4ab7-404f-b1a5-c59542a45a6e" />
+<img width="287" height="248" alt="image" src="https://github.com/user-attachments/assets/7eadb825-da61-4844-b298-03f920b66de9" />
+<img width="274" height="291" alt="image" src="https://github.com/user-attachments/assets/3ad2f844-1f18-4ed6-a578-a224084cd3be" />
+<img width="256" height="328" alt="image" src="https://github.com/user-attachments/assets/ecc60e52-b3cb-42a7-806b-a11439e52dc0" />
+<img width="246" height="340" alt="image" src="https://github.com/user-attachments/assets/ac746890-def0-40ce-9c7a-db6e3c8b35d8" />
+<img width="265" height="317" alt="image" src="https://github.com/user-attachments/assets/31359377-0184-4e68-a6b4-cd298f9e0287" />
+<img width="265" height="287" alt="image" src="https://github.com/user-attachments/assets/202af251-160e-4146-b5c8-932ea8461bf5" />
 
-- **Execution Tasks (Critical Step):** Navigate to System Definition > Tables, search for table name: `sn_aia_execution_plan`. Click on the table to open the list view. Look in the Objective column for plans related to your supply chain processing. Click on your execution plan record to open it. In the execution plan form, find the State field and click on the 'Completed' value (this is a clickable link). This opens a list view showing all tasks associated with your execution plan. Use Ctrl+A (Windows) or Cmd+A (Mac) to select all tasks, then right-click on the selected tasks > Add to Update Set.
+<img width="257" height="113" alt="image" src="https://github.com/user-attachments/assets/660517fc-b3d2-4f60-a42e-7c3e5c115fae" />
 
-### Evidence Records:
-- Complete "dispatched" record from Delivery Delay table showing full workflow progression
-- Sample record from Supply Agreement table demonstrating customer contract data
-- Incident record created by Agent 1 during the financial analysis process
 
-### n8n Integration:
-- Exported n8n workflow configuration (`n8n-workflow.json`)
-- n8n execution log: `n8n-execution.log` (consolidated input/output data from all workflow nodes)
 
-**Required Log File:** `n8n-execution.log` - including:
-- **Webhook node:** Capture INPUT data (received from ServiceNow)
-- **AI Agent node:** Capture OUTPUT data (coordination decisions)
-- **Logistics MCP Client:** Capture OUTPUT data (communications sent)
-- **Retail MCP Client:** Capture OUTPUT data (communications sent)
-- **ServiceNow MCP Client:** Capture OUTPUT data (status updates sent)
 
-## 2. README.md Content Requirements
 
-Required sections:
+## Business Value:
+ This system brings measurable efficiency, accuracy, and insight to PepsiCo's supply chain operations that once depended on manual updates and spreadsheets. By linking ServiceNow, n8n, and AI-powered agents, it automates the full cycle of delivery tracking from detecting late shipments to calculating penalties and creating incidents in real time.
 
-- **System Overview:** Description of the automated supply chain incident processing system and its business impact for PepsiCo operations
+Before automation, a delayed delivery required analysts to pull data, check contract terms, calculate fines, and manually open an incident ticket. Now those same actions happen instantly. The workflow fetches the route record, reads the customer’s Supply Agreement, calculates the delay cost, and pushes an Incident with all the details attached to the right record in seconds.
 
-- **Implementation Steps:** Key architectural decisions, AI agent configuration choices, and integration approaches used
+This saves hours of coordination for each delay, eliminates data entry mistakes, and ensures financial accuracy when penalties affect profit margins. Managers gain faster visibility into performance trends, seeing which routes or vendors are driving cost overruns, and can act immediately instead of waiting for weekly reports.
 
-- **Architecture Diagram:** Visual representation of the complete workflow showing ServiceNow agents, n8n coordination, and external system integration
+The automation also improves customer trust because deliveries are monitored continuously, response times are faster, and incident updates are consistent across teams. Finance teams get real-time cost reporting, logistics gains proactive alerts, and operations can focus on prevention instead of cleanup.
 
-- **Optimization:** Analysis of how you optimized the system for efficiency, reliability, and performance. Document specific optimizations implemented (such as webhook URL configuration, script efficiency improvements, error handling enhancements, or workflow streamlining) and identify future optimization opportunities (such as caching strategies, parallel processing possibilities, advanced error recovery mechanisms, or enhanced monitoring capabilities).
+Long term, the same architecture can extend beyond logistics by automating SLA monitoring for procurement, IT service management, or vendor compliance. It is not just about cutting steps; it is about turning reactive processes into predictive, data-driven workflows that save time, reduce costs, and scale with the business.
 
-- **Testing Results:** Evidence of successful end-to-end system operation with specific examples of financial analysis, routing decisions, and external execution
-
-- **Business Value:** Analysis of how the system improves PepsiCo's supply chain operations, reduces manual intervention, and optimizes delivery cost management
-
-## 3. Architecture Diagram Requirements
-
-Create a comprehensive system flow diagram showing:
-- Truck breakdown detection and ServiceNow agent processing
-- AI-driven financial analysis and route decision workflows
-- n8n orchestration of external system coordination
-- Complete data flow and integration patterns
-- Status progression and tracking capabilities
-
-Use diagramming tool and save as `Diagram.png`
