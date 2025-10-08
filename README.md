@@ -12,23 +12,6 @@
 
 **Required Knowledge:** Understanding of ServiceNow AI Agent Studio, basic n8n workflow design, and system integration concepts.
 
-## GitHub Repository Setup
-
-### Step 1: Create your GitHub repository with the name `agentic-logistics-incident-response`
-
-### Step 2: Create your system architecture diagram using a drawing tool (ex. Draw.io) and save as `Diagram.png`
-
-### Step 3: Set up your repository structure:
-
-```
-/agentic-logistics-incident-response
-├── README.md
-├── agentic-logistics-incident-response.xml
-├── n8n-workflow.json
-├── n8n-execution.log
-├── Diagram.png
-```
-
 ## System Resources and Context
 
 ### Prerequisites:
@@ -36,7 +19,7 @@
 - AWS Bedrock access keys for AI model integration in n8n
 - Javascript code for ServiceNow agent to kick off n8n workflow through webhook
 
-### What I Build:
+### What I Built:
 - ServiceNow scoped application with AI agents for supply chain processing
 - n8n workflow for external system coordination
 - Complete integration testing and validation
@@ -44,11 +27,13 @@
 **n8n Environment Setup:** I created a free n8n account with my personal a new email address 
 ## Assignment Objectives
 
-### General System Component Flow
-Logistics Provider Breakdown Notification → PepsiCo ServiceNow Financial Analysis Agent → Route Decision Agent → n8n Communication Coordination Agent
+### System Component Flow
+<img width="1657" height="1403" alt="Diagram png" src="https://github.com/user-attachments/assets/0dfdd9fa-d465-4a12-a9b1-c852fca8711a" />
+
 
 ### System Components:
-![Diagram](Diagram.png)
+<img width="631" height="286" alt="image" src="https://github.com/user-attachments/assets/25183fae-db47-432d-b2fa-efb56fdebe97" />
+
 
 1. Logistics provider (Schneider) detects truck breakdown and updates PepsiCo ServiceNow via MCP protocol
 2. ServiceNow use case with two sequential AI agents processes breakdown and calculates optimal routing
@@ -75,13 +60,14 @@ Logistics Provider Breakdown Notification → PepsiCo ServiceNow Financial Analy
 ## Sequential Configuration Steps
 
 ### Step 1: Application Setup
-Create a scoped application with the exact name: **PepsiCo Deliveries**
+I created a scoped application with the exact name: **PepsiCo Deliveries**
 
-*This precise naming will auto-generate the scope: x_snc_pepsico_de_0*
+*This precise naming auto-generate the scope: x_snc_pepsico_de_0*
+<img width="794" height="371" alt="image" src="https://github.com/user-attachments/assets/391d79fb-5f6b-4ab2-bf3d-c312a00a6d85" />
 
 ### Step 2: Tables' Structure Requirements
 
-#### Delivery Delay Table: Create table with name "Delivery Delay"
+#### Delivery Delay Table: Create a table with the name "Delivery Delay"
 
 **Required fields:**
 - `route_id` (Integer, Primary Key)
@@ -95,7 +81,7 @@ Create a scoped application with the exact name: **PepsiCo Deliveries**
 - `assigned_to` (Reference to User) - Critical: Used for trigger execution context and permissions
 - `incident_sys_id` (String, 32) - Links to associated incident records
 
-**Important:** The `assigned_to` field in Delivery Delay table serves as the execution context for AI agent triggers. This ensures proper permissions and security boundaries when agents process records automatically.
+**Important:** The `assigned_to` field in the Delivery Delay table serves as the execution context for AI agent triggers. This ensures proper permissions and security boundaries when agents process records automatically.
 
 **Sample Row inserted to Delivery Delay Table by Logistics Company system:**
 
@@ -136,12 +122,14 @@ Create a scoped application with the exact name: **PepsiCo Deliveries**
 - `customer_name` (String, 100)
 - `deliver_window_hours` (Integer) - Contractual delivery timeframe
 - `stockout_penalty_rate` (Integer) - Cost per hour of delay in dollars
+<img width="793" height="303" alt="image" src="https://github.com/user-attachments/assets/aff9698a-bc25-4cd7-b55a-54f878621272" />
 
 **Required Sample Record:** Create this record in your Supply Agreement table:
 - `customer_id`: 1
 - `customer_name`: "Whole Foods"
 - `deliver_window_hours`: 3
 - `stockout_penalty_rate`: 250
+<img width="799" height="80" alt="image" src="https://github.com/user-attachments/assets/206c2643-9ead-4c59-8080-7b022658c190" />
 
 ### Data Dictionary
 
@@ -150,11 +138,13 @@ Create a scoped application with the exact name: **PepsiCo Deliveries**
 - **`stockout_penalty_rate`**: The financial penalty (in dollars) assessed for every hour a delivery exceeds the contractual delivery window. Whole Foods charges PepsiCo $250 for each hour beyond the 3-hour delivery window. For example, a 5-hour delivery would incur penalties for 2 hours (5 minus 3), resulting in a $500 penalty charge.
 
 ### Step 3: Use Case and Trigger Configuration
+<img width="856" height="351" alt="image" src="https://github.com/user-attachments/assets/0f7e7cc0-ec9e-467e-abdc-7535c0101c8f" />
 
 **Critical Requirement:** Create use case with trigger configuration that activates when:
 - **Table:** Delivery Delay
 - **Condition:** Status equals "pending"
 - **Run As:** User referenced in the assigned_to field of the triggering record
+<img width="828" height="152" alt="image" src="https://github.com/user-attachments/assets/14385dbd-2ace-4891-a7c9-15ad81c981b6" />
 
 **Trigger Testing:** If automatic triggering doesn't function correctly, test your agents manually through AI Agent Studio using specific route_id values to validate functionality. Document why your trigger may not be working.
 
@@ -162,12 +152,20 @@ Create a scoped application with the exact name: **PepsiCo Deliveries**
 
 #### Agent 1: Route Financial Analysis Agent
 
-**Purpose:** Analyze financial impact of delivery disruptions and create incident tracking
+**Purpose:** Analyze the financial impact of delivery disruptions and create incident tracking
+<img width="947" height="269" alt="image" src="https://github.com/user-attachments/assets/16d57e9b-c71f-428b-98c9-b91609c318da" />
+
+
+<img width="935" height="240" alt="image" src="https://github.com/user-attachments/assets/77a39b2e-457d-41a6-a898-d4201b95e9e4" />
+
+
+<img width="938" height="256" alt="image" src="https://github.com/user-attachments/assets/b5b8ea10-f9f6-4afd-b8a9-6a4255a8f70b" />
 
 **Suggested Tools:**
 - Record lookup operations for delivery delay and supply agreement data
 - Incident creation and management tools
 - Status update operations for workflow progression
+<img width="949" height="290" alt="image" src="https://github.com/user-attachments/assets/eb4b6bd1-9373-426c-8aed-b583c9c3fc83" />
 
 **Key Responsibilities:**
 - Query customer contract terms and penalty structures from Supply Agreement table
@@ -179,12 +177,18 @@ Create a scoped application with the exact name: **PepsiCo Deliveries**
 #### Agent 2: Route Decision Agent
 
 **Purpose:** Select optimal routes and coordinate external execution
+<img width="946" height="208" alt="image" src="https://github.com/user-attachments/assets/aa569b62-b2ea-4b7e-9f24-5dab3e186860" />
+<img width="935" height="226" alt="image" src="https://github.com/user-attachments/assets/488da86d-fff4-4121-815a-42622f00c7f8" />
+<img width="788" height="173" alt="image" src="https://github.com/user-attachments/assets/9f776694-c5e8-4902-87cf-795deadc2a1a" />
+<img width="757" height="143" alt="image" src="https://github.com/user-attachments/assets/a54a69f0-7dee-41c5-8ac8-7e2b3183378d" />
 
 **Suggested Tools:**
 - Record lookup operations for calculated financial data
 - Route selection and update operations
 - Incident priority management tools
 - Webhook or script tools for n8n integration
+
+<img width="949" height="331" alt="image" src="https://github.com/user-attachments/assets/d61b280d-8a9f-42e8-bc3e-990e083f6655" />
 
 **Key Responsibilities:**
 - Analyze route options using financial impact and delivery constraints
@@ -198,6 +202,7 @@ Create a scoped application with the exact name: **PepsiCo Deliveries**
 **Important Script Configuration:** When implementing script tools for webhook integration, configure the webhook URL as a variable at the top of your script for easy maintenance and proper logging. This ensures consistent URL management and improves script reliability.
 
 ### Step 5: n8n Workflow Implementation and Logging
+<img width="482" height="247" alt="image" src="https://github.com/user-attachments/assets/b910f520-d398-4657-9b61-c080dc5feb66" />
 
 #### Required n8n Nodes:
 - Webhook (receives ServiceNow routing decisions)
@@ -277,6 +282,7 @@ Capture execution logs for all workflow components and consolidate them into a s
 - Confirm Agent 2 executes after Agent 1 completes and selects routes
 - Validate n8n webhook receives routing decisions and coordinates external system integration
 - Check status progression: pending → calculated → approved → dispatched
+<img width="780" height="298" alt="image" src="https://github.com/user-attachments/assets/7577c792-865f-4663-821c-de4c4333492a" />
 
 #### Integration Verification:
 - Confirm webhook connectivity between ServiceNow and n8n
