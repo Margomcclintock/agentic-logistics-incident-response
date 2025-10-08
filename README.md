@@ -14,10 +14,10 @@
 
 ## System Resources and Context
 
-### Prerequisites:
+### Requirements:
 - Bearer token for ServiceNow MCP authentication from n8n environment
 - AWS Bedrock access keys for AI model integration in n8n
-- Javascript code for ServiceNow agent to kick off n8n workflow through webhook
+- JavaScript code for ServiceNow agent to kick off n8n workflow through webhook
 
 ### What I Built:
 - ServiceNow scoped application with AI agents for supply chain processing
@@ -27,11 +27,11 @@
 **n8n Environment Setup:** I created a free n8n account with my personal a new email address 
 ## Assignment Objectives
 
-### System Component Flow
+### AI Agent System Component Flow
 <img width="1657" height="1403" alt="Diagram png" src="https://github.com/user-attachments/assets/0dfdd9fa-d465-4a12-a9b1-c852fca8711a" />
 
 
-### System Components:
+### Full System Components:
 <img width="631" height="286" alt="image" src="https://github.com/user-attachments/assets/25183fae-db47-432d-b2fa-efb56fdebe97" />
 
 
@@ -43,19 +43,19 @@
 ## Implementation Objectives
 
 ### Build Intelligent Financial Analysis
-- Create AI agent that calculates delay costs based on delivery contracts
-- Implement mathematical analysis of route options with penalty calculations
-- Generate comprehensive financial impact assessments in structured format
+- I created an AI agent that calculates delay costs based on delivery contracts
+- I implement mathematical analysis of route options with penalty calculations
+- I generate comprehensive financial impact assessments in a structured format
 
 ### Enable Smart Route Decision Making
-- Develop AI agent that selects optimal routes based on cost and time constraints
-- Configure agent instructions for route selection and incident priority assignment through natural language prompts
-- Trigger external execution workflows through webhook integration
+- I developed an AI agent that selects optimal routes based on cost and time constraints
+- I configured agent instructions for route selection and incident priority assignment through natural language prompts
+- I created a trigger for external execution workflows through webhook integration
 
 ### Coordinate External System Integration
-- Build n8n agent workflow that receives routing decisions via webhook
-- Integrate with multiple external systems using MCP protocol
-- Ensure proper status updates and execution tracking
+- I built an n8n agent workflow that receives routing decisions via webhook
+- I integrate with multiple external systems using MCP protocol
+- I ensure proper status updates and execution tracking
 
 ## Sequential Configuration Steps
 
@@ -67,7 +67,7 @@ I created a scoped application with the exact name: **PepsiCo Deliveries**
 
 ### Step 2: Tables' Structure Requirements
 
-#### Delivery Delay Table: Create a table with the name "Delivery Delay"
+#### Delivery Delay Table: I create a table with the name "Delivery Delay"
 
 **Required fields:**
 - `route_id` (Integer, Primary Key)
@@ -115,7 +115,7 @@ I created a scoped application with the exact name: **PepsiCo Deliveries**
 }
 ```
 
-#### Supply Agreement Table: Create table with name "Supply Agreement"
+#### Supply Agreement Table: I create a table with the name "Supply Agreement"
 
 **Required fields:**
 - `customer_id` (Integer, Primary Key)
@@ -140,7 +140,7 @@ I created a scoped application with the exact name: **PepsiCo Deliveries**
 ### Step 3: Use Case and Trigger Configuration
 <img width="856" height="351" alt="image" src="https://github.com/user-attachments/assets/0f7e7cc0-ec9e-467e-abdc-7535c0101c8f" />
 
-**Critical Requirement:** Create use case with trigger configuration that activates when:
+**Critical Requirement:** I created a use case with a trigger configuration that activates when:
 - **Table:** Delivery Delay
 - **Condition:** Status equals "pending"
 - **Run As:** User referenced in the assigned_to field of the triggering record
@@ -256,7 +256,7 @@ I created a scoped application with the exact name: **PepsiCo Deliveries**
 
 ## n8n Execution Logging Requirements
 
-Capture execution logs for all workflow components and consolidate them into a single log file.
+I captured execution logs for all workflow components and consolidated them into a single log file. (Located above)
 
 ### To Access n8n Execution Logs:
 1. Navigate to the Executions tab in your n8n workflow
@@ -286,9 +286,13 @@ Capture execution logs for all workflow components and consolidate them into a s
 
 #### Integration Verification:
 - Confirm webhook connectivity between ServiceNow and n8n
+- <img width="955" height="350" alt="image" src="https://github.com/user-attachments/assets/66ea2154-da60-42d9-941e-698ee5ad784e" />
+
 - Verify MCP client authentication and communication
 - Test incident creation and priority assignment functionality
 - Validate status transitions and logging throughout the process
+<img width="938" height="392" alt="image" src="https://github.com/user-attachments/assets/ee1db4ac-6993-41ed-993e-8fcc7bf2b933" />
+<img width="949" height="371" alt="image" src="https://github.com/user-attachments/assets/21a9622b-dd5d-45f6-819b-24689745f67b" />
 
 ## Deliverables - Submission Requirements
 
